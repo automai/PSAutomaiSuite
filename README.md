@@ -1,101 +1,335 @@
-<a name="readme-top"></a>
-<base target="_blank">
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
+# Automai PowerShell Module Documentation
 
-[![LinkedIn][linkedin-shield]][linkedin-url]
-[![Twitter][twitter-shield]][twitter-url]
+#Introduction
+This PowerShell module is available on the PowerShell Gallery, its designed to enable automation of some of the main functions available to users of the Automai software.
 
-<!-- PROJECT LOGO -->
-<br />
-<div align="center">
-  <a href="https://www.automai.com/" target="_blank">
-    <img src="https://www.automai.com/wp-content/uploads/2020/11/automai.svg" title="automai" alt="Logo" width="200" height="100">
-  </a>
+Please log any issues with the module to the support team to be addressed within the Automai organisation.
 
-  <h3 align="center">Automai Suite PowerShell Module</h3>
+#General
+## Connect-Automai
 
-  <p align="center">
-    A PowerShell module to utilise REST APIs within the Automai Suite.
-  </p>
-</div>
+### SYNOPSIS
+Connects to the Automai Server API to generate a token.
 
+### DESCRIPTION
+This cmdlet connects to the Automai REST endpoint for Director to obtain a token for further API calls.
 
+### OUTPUTS
+API token as a string.
 
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <il><a href="#about-the-project">About The Project</a></il>
-    <li><a href="#azure-deployment">Azure</a></li>   
-    <ul><a href="#azuregetting-started">Default Settings</a></ul>
-    <ul><a href="#azuredefault-settings">Default Settings</a></ul>
-    <ul><a href="#azuresettings-customisation">Customising Settings</a></ul>
-    <li><a href="#aws-deployment">AWS</a></li>
-    <ul><a href="#awsgetting-started">Default Settings</a></ul>
-    <ul><a href="#awsdefault-settings">Default Settings</a></ul>
-    <ul><a href="#awssettings-customisation">Customising Settings</a></ul>
-    <li><a href="#gcp-deployment">AWS</a></li>
-    <ul><a href="#gcpgetting-started">Default Settings</a></ul>
-    <ul><a href="#gcpdefault-settings">Default Settings</a></ul>
-    <ul><a href="#gcpsettings-customisation">Customising Settings</a></ul>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ol>
-</details>
+### NOTES
+- If there is an issue grabbing the API token, the script will fail.
 
+### SYNTAX
+```powershell
+Connect-Automai
+    [-automaiServer] <String>
+    [-automaiPort] <Int32>
+    [-automaiUsername] <String>
+    [-automaiPassword] <String>
+    [-UseSSL]
+    [-detailedOutput]
+```
 
+---
+## Get-JobStatus
 
-<!-- ABOUT THE PROJECT -->
-## About The Project<a name="about-the-project"></a>
+### SYNOPSIS
+Get the current status of a job.
 
+### DESCRIPTION
+This cmdlet allows you to specify the ID of a job obtained by `Get-LoaderReport` to retrieve the current status of the job.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+### OUTPUTS
+Returns the status of the job.
 
-## Azure Deployment
-<a name="azure-deployment"></a>
+### NOTES
+- Make sure you have used `Connect-Automai` before you run this command.
 
-<!-- GETTING STARTED -->
-## Getting Started<a name="azuregetting-started"></a>
+### SYNTAX
+```powershell
+Get-JobStatus
+    [-authHeader] <Object>
+    [-automaiServer] <String>
+    [-automaiPort] <Int32>
+    [-UseSSL]
+    [-jobID <String>]
+    [-detailedOutput]
+```
+---
+## Set-Schedule
 
-### Default Settings<a name="azuredefault-settings"></a>
+### SYNOPSIS
+Sets a schedule as active or inactive.
 
-### Customising Settings<a name="azuresettings-customisation"></a>
+### DESCRIPTION
+This cmdlet allows you to set a schedule as inactive or active, which can be used to stop or start automated schedules.
 
-```sh
-  & Windows_Deploy.ps1 -folderShare "C:\Automai" -shareName "Automai" -logLocation "C:\Windows\Temp" -dateFormat "yyyy-MM-dd_HH-mm" -shareUser "Everyone"
-  ```
+### OUTPUTS
+Returns `TRUE` on success.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+### NOTES
+- Make sure you have used `Connect-Automai` before you run this command.
 
-## AWS Deployment
-<a name="aws-deployment"></a>
+### SYNTAX
+```powershell
+Set-Schedule
+    [-authHeader] <Object>
+    [-automaiServer] <String>
+    [-automaiPort] <Int32>
+    [-UseSSL]
+    [-schedule <String>]
+    [-flag <String>]
+    [-detailedOutput]
+```
+---
 
-<!-- LICENSE -->
-## License<a name="license"></a>
+#Loader
 
-Distributed under the GNU 3 License. See `LICENSE` for more information.
+## Get-LoaderPlan
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+**SYNOPSIS**
 
-<!-- CONTACT -->
-## Contact<a name="contact"></a>
+Get the current status of a test plan.
 
-Automai Corporation - [@AutomaiCorp](https://twitter.com/AutomaiCorp)
+**DESCRIPTION**
 
-Project Link: [https://github.com/automai/AutomaiSuite-Deployment](https://github.com/automai/AutomaiSuite-Deployment)
+This cmdlet retrieves the current status of a test plan specified by its ID. It requires authentication through the `Connect-Automai` cmdlet before use.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+**OUTPUTS**
 
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[license-url]: https://raw.githubusercontent.com/automai/AutomaiSuite-Deployment/main/LICENSE{:target="_blank"}
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://www.linkedin.com/company/automai-corp/{:target="_blank"}
-[twitter-shield]: https://img.shields.io/badge/-twitter-black.svg?style=for-the-badge&logo=twitter&colorB=555
-[twitter-url]: https://twitter.com/AutomaiCorp{:target="_blank"}
+Returns the status of the test plan.
+
+**NOTES**
+
+Make sure you have used `Connect-Automai` before you run this command.
+
+**SYNTAX**
+```powershell
+Get-LoaderPlan
+    [-authHeader] <Object>
+    [-automaiServer] <String>
+    [-automaiPort] <Int32>
+    [-UseSSL]
+    [-testPlanID] <String>
+    [-testRunID <Int32>]
+    [-detailedOutput]
+```
+---
+
+## Get-LoaderReport
+
+### SYNOPSIS
+Generate a test plan report.
+
+### DESCRIPTION
+This cmdlet schedules a job to generate a test plan report specified by its ID. It requires authentication through the `Connect-Automai` cmdlet before use.
+
+### OUTPUTS
+Returns an object with the Job ID to check with further calls and the URL of the report for download.
+
+### NOTES
+- Make sure you have used `Connect-Automai` before you run this command.
+- You need to run `Get-JobStatus` to see when it's complete.
+
+### SYNTAX
+```powershell
+Get-LoaderReport
+    [-authHeader] <Object>
+    [-automaiServer] <String>
+    [-automaiPort] <Int32>
+    [-UseSSL]
+    [-testPlanID] <String>
+    [-testRunID <Int32>]
+    [-reportType <String>]
+    [-detailedOutput]
+```
+---
+## Get-LoaderUsers
+
+### SYNOPSIS
+Checks connected rLoader Users.
+
+### DESCRIPTION
+This cmdlet returns the number of rLoader users that are currently connected. It requires authentication through the `Connect-Automai` cmdlet before use.
+
+### OUTPUTS
+Number of rLoader users in an XML Object.
+
+### NOTES
+- Make sure you have used `Connect-Automai` before you run this command.
+
+### SYNTAX
+```powershell
+Get-LoaderUsers
+    [-authHeader] <Object>
+    [-automaiServer] <String>
+    [-automaiPort] <Int32>
+    [-UseSSL]
+    [-detailedOutput]
+```
+---
+## Play-LoaderPlan
+
+### SYNOPSIS
+Schedules and plays a test plan.
+
+### DESCRIPTION
+This cmdlet allows you to specify the ID of a test plan to start the test plan.
+
+### OUTPUTS
+Returns the ID of the scheduled test.
+
+### NOTES
+- Make sure you have used `Connect-Automai` before you run this command.
+
+### SYNTAX
+```powershell
+Play-LoaderPlan
+    [-authHeader] <Object>
+    [-automaiServer] <String>
+    [-automaiPort] <Int32>
+    [-UseSSL]
+    [-testPlanID <String>]
+    [-testPlanUsers <Int32>]
+    [-testPlanSteadyState <String>]
+    [-testPlanSteadyStateTime]
+    [-testPlanIterations <Int32>]
+    [-testPlanNotes <String>]
+    [-detailedOutput]
+```
+---
+## Start-LoaderUsers
+
+### SYNOPSIS
+Starts rLoader users on a specific BotManager.
+
+### DESCRIPTION
+This cmdlet allows you to start rLoader users on the specified BotManager.
+
+### OUTPUTS
+Launcher launched requested users or did not, true or false, as an XML Object.
+
+### NOTES
+- Make sure you have used `Connect-Automai` before you run this command.
+
+### SYNTAX
+```powershell
+Start-LoaderUsers
+    [-authHeader] <Object>
+    [-automaiServer] <String>
+    [-automaiPort] <Int32>
+    [-UseSSL]
+    [-botManagers <String>]
+    [-number_Of_Rusers <Int32>]
+    [-launch_Delay]
+    [-detailedOutput]
+```
+---
+## Stop-LoaderPlan
+
+### SYNOPSIS
+Stop the specified test run.
+
+### DESCRIPTION
+This cmdlet allows you to stop a test plan run by specifying its ID.
+
+### OUTPUTS
+Returns success if the stop succeeded.
+
+### NOTES
+- Make sure you have used `Connect-Automai` before you run this command.
+
+### SYNTAX
+```powershell
+Stop-LoaderPlan
+    [-authHeader] <Object>
+    [-automaiServer] <String>
+    [-automaiPort] <Int32>
+    [-UseSSL]
+    [-testPlanID] <String>
+    [-detailedOutput]
+```
+---
+#Watcher
+# PowerShell Module Documentation
+
+## Get-WatcherData
+
+### SYNOPSIS
+Gets Watcher report data.
+
+### DESCRIPTION
+This cmdlet retrieves Watcher report data based on the specified timestamp and other optional parameters.
+
+### OUTPUTS
+Returns report information.
+
+### NOTES
+- Make sure you have used `Connect-Automai` before you run this command.
+
+### SYNTAX
+```powershell
+Get-WatcherData
+    [-authHeader] <Object>
+    [-automaiServer] <String>
+    [-automaiPort] <Int32>
+    [-UseSSL]
+    [-timestamp] <String>
+    [-last_report_id <String>]
+    [-location_name <String>]
+    [-watcher_ids <String>]
+    [-detailedOutput]
+```
+---
+#Worker/Tester
+
+## Play-WorkerTesterFlow
+
+### SYNOPSIS
+Schedules and plays a worker or tester flow.
+
+### DESCRIPTION
+This cmdlet schedules and plays a worker or tester flow based on the specified flow ID.
+
+### OUTPUTS
+Returns success or failure.
+
+### NOTES
+- Make sure you have used `Connect-Automai` before you run this command.
+
+### SYNTAX
+```powershell
+Play-WorkerTesterFlow
+    [-authHeader] <Object>
+    [-automaiServer] <String>
+    [-automaiPort] <Int32>
+    [-UseSSL]
+    [-flowID] <String>
+    [-detailedOutput]
+```
+---
+## Stop-WorkerTesterFlow
+
+### SYNOPSIS
+Stops a worker or tester flow.
+
+### DESCRIPTION
+This cmdlet stops a worker or tester flow based on the specified flow ID.
+
+### OUTPUTS
+Returns success or failure.
+
+### NOTES
+- Make sure you have used `Connect-Automai` before you run this command.
+
+### SYNTAX
+```powershell
+Stop-WorkerTesterFlow
+    [-authHeader] <Object>
+    [-automaiServer] <String>
+    [-automaiPort] <Int32>
+    [-UseSSL]
+    [-flowID] <String>
+    [-detailedOutput]
+```
