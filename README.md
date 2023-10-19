@@ -5,7 +5,7 @@ This PowerShell module is available on the PowerShell Gallery, its designed to e
 
 Please log any issues with the module to the support team to be addressed within the Automai organisation.
 
-#General
+# General
 ## Connect-Automai
 
 ### SYNOPSIS
@@ -84,7 +84,7 @@ Set-Schedule
 ```
 ---
 
-#Loader
+# Loader
 
 ## Get-LoaderPlan
 
@@ -251,8 +251,7 @@ Stop-LoaderPlan
     [-detailedOutput]
 ```
 ---
-#Watcher
-# PowerShell Module Documentation
+# Watcher
 
 ## Get-WatcherData
 
@@ -282,7 +281,7 @@ Get-WatcherData
     [-detailedOutput]
 ```
 ---
-#Worker/Tester
+# Worker/Tester
 
 ## Play-WorkerTesterFlow
 
