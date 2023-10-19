@@ -12,9 +12,10 @@ Returns the status of the test plan
 Make sure you have used Connect-Automai before you run this command
 
 .EXAMPLE
-Get-LoaderPlan
+Get-LoaderPlan -authHeader $token -automaiServer automai-01.ctxlab.local -automaiPort 8888 -testPlanID AL-4537 -testRunID 33
+Get the status of the Loader plan run AL-4537 with run ID 33
+Returns the status of the current plan run
 
-This command will schedule and run a test
 #>
 
 Function Get-LoaderPlan {

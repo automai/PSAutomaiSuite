@@ -12,9 +12,8 @@ Returns report information
 Make sure you have used Connect-Automai before you run this command
 
 .EXAMPLE
-Get-WatcherData
-
-This command will get a list of all available reports
+Get-WatcherData -authHeader $token -automaiServer automai-01.ctxlab.local -automaiPort 8888 -timestamp "OCT/10/2023-0900"
+Get all watcher data from October 10th 2023 at 9am until the present date and returns a JSON object
 #>
 
 Function Get-WatcherData {

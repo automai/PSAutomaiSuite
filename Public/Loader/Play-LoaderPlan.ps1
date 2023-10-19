@@ -12,7 +12,8 @@ Returns the ID of the scheduled test
 Make sure you have used Connect-Automai before you run this command
 
 .EXAMPLE
-Play-TestPlan
+Play-TestPlan -authHeader $token -automaiServer AUTOMAI-01.ctxlab.local -automaiPort 8888 -testPlanID AL-4099 -testPlanUsers 1 -testPlanSteadyState no -testPlanSteadyStateTime 10 -testPlanIterations 1 -testPlanNotes "Test"
+Plays loader test plan and returns success and the run id number of the run, the xml object is returned
 
 #>
 
@@ -41,7 +42,7 @@ Function Play-LoaderPlan {
         [Parameter(Mandatory=$false, HelpMessage = "Steady State time for the test plan")]
         $testPlanSteadyStateTime,
         [Parameter(Mandatory=$false, HelpMessage = "Test plan iterations, number of times to run the plan")]
-        $testPlanIterations,
+        [int]$testPlanIterations,
         [Parameter(Mandatory=$false, HelpMessage = "Notes for the test")]
         $testPlanNotes,
         [Parameter(Mandatory=$false, HelpMessage = "Verbose output to see errors if there is a problem")]

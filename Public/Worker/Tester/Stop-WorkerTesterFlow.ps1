@@ -12,7 +12,8 @@ Returns success or failure
 Make sure you have used Connect-Automai before you run this command
 
 .EXAMPLE
-Stop-WorkerTesterFlow
+Stop-WorkerTesterFlow -authHeader $token -automaiServer automai-01.ctxlab.local -automaiPort 8888 -flowID AW-3102
+Will return success or error
 
 #>
 

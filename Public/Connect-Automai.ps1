@@ -24,8 +24,8 @@ Use SSL communication for the connection
 
 .EXAMPLE
 Connect-Automai -automaiServer AUTOMAI-01.lab.local -automaiPort 8888 -automaiUsername admin -automaiPassword automai
-
 This will log in to the AUTOMAI-01.lab.local server on port 8888 using the specified username and password and return an api token
+
 #>
 
 Function Connect-Automai {

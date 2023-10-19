@@ -12,7 +12,8 @@ Returns TRUE on success
 Make sure you have used Connect-Automai before you run this command
 
 .EXAMPLE
-Get-WatcherData -authHeader $token -automaiServer automai-01.ctxlab.local -automaiPort 8888 -timestamp "JUL/17/2023-1300" -detailedOutput
+Set-Schedule -authHeader $token -automaiServer automai-01.ctxlab.local -automaiPort 8888 -detailedOutput -schedule 'new1' -flag inactive
+Sets the schedule "new1" as inactive, Returns True
 #>
 
 Function Set-Schedule {
@@ -59,7 +60,7 @@ $resourceUri = "$($protocol)$($automaiServer):$($automaiPort)/api/schedule/"
 try {                
     
     $post_Body = @{
-        schedule = $schedule
+        schedule_name = $schedule
         flag = $flag
     }
 
@@ -75,5 +76,4 @@ try {
 }
 
 Return $response.root.success
-
 }

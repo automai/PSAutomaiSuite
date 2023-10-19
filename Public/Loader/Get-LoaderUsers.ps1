@@ -12,9 +12,9 @@ Number of rLoader users in XML Object
 Make sure you have used Connect-Automai before you run this command
 
 .EXAMPLE
-Get-LoaderUsers
+Get-LoaderUsers -authHeader $token -automaiServer AUTOMAI-01.ctxlab.local -automaiPort 8888
+This command will get a list of all rLoader users that are currently connected - returns the number of rLoaders connected
 
-This command will get a list of all rLoader users that are currently connected
 #>
 
 Function Get-LoaderUsers {

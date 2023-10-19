@@ -12,7 +12,8 @@ Returns success or failure
 Make sure you have used Connect-Automai before you run this command
 
 .EXAMPLE
-Play-TestPlan
+Play-WorkerTesterFlow -authHeader $token -automaiServer automai-01.ctxlab.local -automaiPort 8888 -flowID AW-7307
+Will play worker/tester plan AW-7307 and return success or otherwise
 
 #>
 
@@ -57,7 +58,7 @@ $resourceUri = "$($protocol)$($automaiServer):$($automaiPort)/api/worker/createa
 try {                
     
     $post_Body = @{        
-        f_id = $flowID
+        f_custom_id = $flowID
     }
 
     #Write-Host "Attempting to connect to $resourceUri"

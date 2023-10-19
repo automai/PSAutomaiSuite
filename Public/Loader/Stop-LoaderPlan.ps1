@@ -12,7 +12,8 @@ Returns success if stop succeeded
 Make sure you have used Connect-Automai before you run this command
 
 .EXAMPLE
-Get-TestPlan
+Stop-LoaderPlan -authHeader $token -automaiServer automai-01.ctxlab.local -automaiPort 8888 -testPlanID AL-4537
+Will stop loader plan AL-4537 from playing
 
 #>
 

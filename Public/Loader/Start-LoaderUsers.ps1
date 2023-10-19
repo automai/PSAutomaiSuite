@@ -12,9 +12,13 @@ Launcher launched requested users or did not, true or false. XML Object.
 Make sure you have used Connect-Automai before you run this command
 
 .EXAMPLE
-Get-LoaderUsers
+Start-LoaderUsers -authHeader $token -automaiServer AUTOMAI-01.ctxlab.local -automaiPort 8888 -number_Of_Rusers 1 -launch_Delay 5
+Starts 1 rloader on all botmanagers with a launch delay of 5 seconds
 
-This command will get a list of all rLoader users that are currently connected
+Start-LoaderUsers -authHeader $token -automaiServer AUTOMAI-01.ctxlab.local -automaiPort 8888 -number_Of_Rusers 1 -launch_Delay 5 -BotManagers "botmanager-01,botmanager-03"
+Starts 1 rloader on botmanagers 01 and 03 only
+
+Returns True or False
 #>
 
 Function Start-LoaderUsers {
@@ -34,7 +38,7 @@ Function Start-LoaderUsers {
         [switch]$UseSSL,
         [Parameter(Mandatory=$false, HelpMessage = "Name of the BotManager to start users on")]
         [ValidateNotNullOrEmpty()]
-        $botManagers,
+        [string]$botManagers,
         [Parameter(Mandatory=$true, HelpMessage = "Numbers or Rusers to start")]
         [ValidateNotNullOrEmpty()]
         $number_Of_Rusers,
@@ -62,10 +66,17 @@ if ($UseSSL) {
 #Generate an API token and return it
 $resourceUri = "$($protocol)$($automaiServer):$($automaiPort)/api/loader/startrloader/"
 
-$post_Body = @{
-    rusers_count = $number_Of_Rusers
-    launch_delay = $launch_Delay
-    bot_hosts = $botManagers
+if (([String]::IsNullOrEmpty($botManagers))) {
+    $post_Body = @{
+        rusers_count = $number_Of_Rusers
+        launch_delay = $launch_Delay
+    }
+} else {
+    $post_Body = @{
+        rusers_count = $number_Of_Rusers
+        launch_delay = $launch_Delay
+        bot_hosts = "$($botManagers | Out-String -Stream),"
+    }
 }
 
 try {                
@@ -78,6 +89,6 @@ try {
     Write-Host "There was an error connecting to the automai server, check if your server is SSL secured and that all the details are correct"
 }
 
-Return $response
+Return $response.root.started
 
 }

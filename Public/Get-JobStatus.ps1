@@ -12,7 +12,8 @@ Returns the status of the job
 Make sure you have used Connect-Automai before you run this command
 
 .EXAMPLE
-Get-JobStatus
+Get-JobStatus -authHeader $token -automaiServer automai-01.ctxlab.local -automaiPort 8888 -jobID AR014453
+Returns Job Status
 
 This command will schedule and run a test
 #>

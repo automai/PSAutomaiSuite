@@ -13,8 +13,9 @@ Make sure you have used Connect-Automai before you run this command
 You need to run Get-JobStatus to see when its complete
 
 .EXAMPLE
-Get-LoaderReport
-
+Get-LoaderReport -authHeader $token -automaiServer automai-01.ctxlab.local -automaiPort 8888 -testPlanID AL-4537 -testRunID 33 -reportType transaction
+Schedules a report generation for test id AL-4537, run if 33 for a transaction report.
+Returns an xml object with the success or failure, the schedule id and url for the report download when completed
 #>
 
 Function Get-LoaderReport {
