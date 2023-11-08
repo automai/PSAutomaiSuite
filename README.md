@@ -1,6 +1,6 @@
 # Automai PowerShell Module Documentation
 
-#Introduction
+# Introduction
 This PowerShell module is available on the PowerShell Gallery, its designed to enable automation of some of the main functions available to users of the Automai software.
 
 Please log any issues with the module to the support team to be addressed within the Automai organisation.
